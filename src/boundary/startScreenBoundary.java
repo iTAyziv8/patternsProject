@@ -1,15 +1,18 @@
 package boundary;
 
 import Controllers.PagingController;
+import Entities.Customer;
 import assets.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class startScreenBoundary implements DataInitializable {
+
 
     @FXML
     private Button viewPurchaseBtn;
@@ -66,7 +69,8 @@ public class startScreenBoundary implements DataInitializable {
     @FXML
     void ViewAllClicked(MouseEvent event) {
         PagingController pc = new PagingController();
-        //TODO: need to load view all purchases page.
+        pc.loadBoundary(ProjectPages.VIEW_PURCHASES_PAGE.getPath(),insuranceType.LIFEINSURANCE_TYPE.getInsuranceTypeString());
     }
+
 
 }

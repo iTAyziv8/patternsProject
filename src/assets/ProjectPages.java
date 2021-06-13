@@ -8,7 +8,9 @@ package assets;
 public enum ProjectPages {
 
     START_PAGE("/boundary/startScreen.fxml"),
-    CUSTOMER_DETAILS_PAGE("/boundary/costumerDetails.fxml");
+    CUSTOMER_DETAILS_PAGE("/boundary/costumerDetails.fxml"),
+    VIEW_PURCHASES_PAGE("/boundary/viewPurchases.fxml");
+
 
 
 

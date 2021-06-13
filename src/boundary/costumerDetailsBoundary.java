@@ -1,6 +1,7 @@
 package boundary;
 
 import Controllers.PagingController;
+import Controllers.startScreenController;
 import aaplication.Main;
 import assets.*;
 import Entities.*;
@@ -9,12 +10,17 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class costumerDetailsBoundary implements DataInitializable {
 
 
     private Customer currCustomer;
+    private ArrayList<Customer> cosArray;
+    public static startScreenController SsController;
+
+
 
     @FXML
     private Label insuranceTypeLabel;
@@ -39,6 +45,7 @@ public class costumerDetailsBoundary implements DataInitializable {
 
     @Override
     public void initData(Object data) {
+
         if(data instanceof String)
             switch ((String)data){
                 case "Car insurance":
@@ -61,20 +68,20 @@ public class costumerDetailsBoundary implements DataInitializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
     @FXML
     private void saveClicked(MouseEvent event) {
         if(validateFields()){
             //TODO: here we have to build that objects with builder pattern
-            Customer tempCustomer = new Customer(fNametxt.getText(),lNametxt.getText(),null);
+            Customer tempCustomer = new Customer().firstName(fNametxt.getText()).lastName(lNametxt.getText()).remarks(Remarkstxt.getText());
             insurance tempcosInsurance = new insurance(insuranceTypeLabel.getText(),Datetxt.getValue(),tempCustomer);
-            tempCustomer.setCostumerInsurance(tempcosInsurance);
+            tempCustomer.withInsurance(tempcosInsurance);
             currCustomer = tempCustomer;
             Toast.makeText(Main.mainStage,"Details has been successfully saved.",1000,1500, 1500, 250, 400);
             clearFields();
         }
+        //TODO: Save costomer into DB.
 
 
     }
@@ -99,4 +106,19 @@ public class costumerDetailsBoundary implements DataInitializable {
         pc.loadBoundary(ProjectPages.START_PAGE.getPath());
     }
 
+    public Customer getCurrCustomer() {
+        return currCustomer;
+    }
+
+    public void setCurrCustomer(Customer currCustomer) {
+        this.currCustomer = currCustomer;
+    }
+
+    public ArrayList<Customer> getCosArray() {
+        return cosArray;
+    }
+
+    public void setCosArray(ArrayList<Customer> cosArray) {
+        this.cosArray = cosArray;
+    }
 }
