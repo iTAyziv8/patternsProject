@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/patternsProject/src"/>
+	<classpathentry exported="true" kind="lib" path="/patternsProject/lib/org.json-chargebee-1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="/patternsProject/lib/json-20210307.jar"/>
+	<classpathentry exported="true" kind="lib" path="/patternsProject/lib/json-simple-1.1.1.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/mysql-connector-java-8.0.20"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

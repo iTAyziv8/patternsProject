@@ -1,10 +1,11 @@
 package boundary;
 
 import Controllers.PagingController;
-import Entities.Customer;
+import Entities.ClientController;
 import assets.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
@@ -29,6 +30,8 @@ public class startScreenBoundary implements DataInitializable {
     @FXML
     private Button LifeInsBtn;
 
+    @FXML
+    private Label jsonLabel;
 
     @Override
     public void initData(Object data) {
@@ -37,6 +40,7 @@ public class startScreenBoundary implements DataInitializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        jsonLabel.setText("Version "+ ClientController.createClientIfNotExist().configuration.getVersion() + "\nDesigned & Developed by:\n" + ClientController.createClientIfNotExist().configuration.getStudentName1() + " & " + ClientController.createClientIfNotExist().configuration.getStudentName2());
 
     }
 

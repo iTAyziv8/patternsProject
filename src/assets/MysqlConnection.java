@@ -1,7 +1,9 @@
 package assets;
 
 import java.sql.*;
+import java.time.LocalDate;
 
+import assets.*;
 /**
  * A department that is responsible for communicating with the DB
  * in a concentrated manner, containing all the queries
@@ -18,7 +20,7 @@ public class MysqlConnection {
     /**
      * The Constant DATABASE_URL.
      */
-    private static final String DATABASE_URL = "jdbc:mysql://uec30klrdxwlktiw:tc3wfAIidXugUM7hr3nK@bpsdc8o22sikrlpvvxqm-mysql.services.clever-cloud.com:3306/bpsdc8o22sikrlpvvxqm"; // URL requires Update
+    private static final String DATABASE_URL = "jdbc:mysql://uec30klrdxwlktiw:tc3wfAIidXugUM7hr3nK@bwudzfwdkiazmpxkn6jj-mysql.services.clever-cloud.com:3306/bwudzfwdkiazmpxkn6jj"; // URL requires Update
 
     /**
      * The Constant USERNAME.
@@ -43,9 +45,11 @@ public class MysqlConnection {
      */
     private static String[] sqlArray;
 
+
     public Connection connect() {
+
         try {
-            Class.forName(DATABASE_DRIVER).newInstance();
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
         } catch (Exception ex) {
             System.err.println("Driver definition failed");
         }
@@ -147,7 +151,9 @@ public class MysqlConnection {
         /* *****************************************************
          * *************** Common Queries ****************
          * *****************************************************/
-        sqlArray[SqlQueryType.GET_ALL_COSTUMER_TABLE.getCode()] = "SELECT* FROM Costumer AS C, User AS U WHERE C.ID = U.userID";
+        sqlArray[SqlQueryType.GET_ALL_Insurance_TABLE.getCode()] = "SELECT* FROM Insurance";
+        sqlArray[SqlQueryType.INSERT_NEW_INSURANCE.getCode()] =
+                "INSERT INTO `Insurance`(`firstName`, `lastName`, `date`,`remarks`,`type`) VALUES (?,?,?,?,?)";
 
 }
     /**

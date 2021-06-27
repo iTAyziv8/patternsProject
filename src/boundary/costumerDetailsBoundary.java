@@ -1,6 +1,7 @@
 package boundary;
 
 import Controllers.PagingController;
+import Controllers.costumerDetailsController;
 import Controllers.startScreenController;
 import aaplication.Main;
 import assets.*;
@@ -16,9 +17,8 @@ import java.util.ResourceBundle;
 public class costumerDetailsBoundary implements DataInitializable {
 
 
-    private Customer currCustomer;
-    private ArrayList<Customer> cosArray;
-    public static startScreenController SsController;
+    private Insurance currInsurance;
+    private costumerDetailsController myController = new costumerDetailsController(this);
 
 
 
@@ -42,6 +42,9 @@ public class costumerDetailsBoundary implements DataInitializable {
 
     @FXML
     private TextField fNametxt;
+
+    @FXML
+    private Label jsonLabel;
 
     @Override
     public void initData(Object data) {
@@ -68,20 +71,20 @@ public class costumerDetailsBoundary implements DataInitializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        jsonLabel.setText("Version "+ ClientController.createClientIfNotExist().configuration.getVersion() + "\nDesigned & Developed by:\n" + ClientController.createClientIfNotExist().configuration.getStudentName1() + " & " + ClientController.createClientIfNotExist().configuration.getStudentName2());
+
     }
 
     @FXML
     private void saveClicked(MouseEvent event) {
         if(validateFields()){
-            //TODO: here we have to build that objects with builder pattern
-            Customer tempCustomer = new Customer().firstName(fNametxt.getText()).lastName(lNametxt.getText()).remarks(Remarkstxt.getText());
-            insurance tempcosInsurance = new insurance(insuranceTypeLabel.getText(),Datetxt.getValue(),tempCustomer);
-            tempCustomer.withInsurance(tempcosInsurance);
-            currCustomer = tempCustomer;
+            Insurance insurance = new Insurance.Builder().setName(fNametxt.getText()).setFamilyName(lNametxt.getText()).setDate(Datetxt.getValue().toString()).setRemarks(Remarkstxt.getText()).setType(insuranceTypeLabel.getText()).build();
+            currInsurance = insurance;
+
             Toast.makeText(Main.mainStage,"Details has been successfully saved.",1000,1500, 1500, 250, 400);
             clearFields();
         }
-        //TODO: Save costomer into DB.
+        myController.setInsuranceIntoDB(currInsurance);
 
 
     }
@@ -106,19 +109,13 @@ public class costumerDetailsBoundary implements DataInitializable {
         pc.loadBoundary(ProjectPages.START_PAGE.getPath());
     }
 
-    public Customer getCurrCustomer() {
-        return currCustomer;
+    public Insurance getCurrCustomer() {
+        return currInsurance;
     }
 
-    public void setCurrCustomer(Customer currCustomer) {
-        this.currCustomer = currCustomer;
+    public void setCurrCustomer(Insurance currCustomer) {
+        this.currInsurance = currCustomer;
     }
 
-    public ArrayList<Customer> getCosArray() {
-        return cosArray;
-    }
 
-    public void setCosArray(ArrayList<Customer> cosArray) {
-        this.cosArray = cosArray;
-    }
 }

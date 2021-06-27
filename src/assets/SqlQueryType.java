@@ -9,8 +9,8 @@ public enum SqlQueryType {
     /* *****************************************
      * ********** Common Queries ****************
      * *****************************************/
-    GET_ALL_COSTUMER_TABLE(SqlExecutionType.EXECUTE_QUERY),
-
+    GET_ALL_Insurance_TABLE(SqlExecutionType.EXECUTE_QUERY),
+    INSERT_NEW_INSURANCE(SqlExecutionType.UPDATE_QUERY),
 
     /* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
     /* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
